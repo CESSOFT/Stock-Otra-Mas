@@ -29,7 +29,8 @@ class ProductEntry(Frame):
     """Interface for product entry."""
     
     def __init__(self, parent = None):
-        self.file = open("C:\Users\CSanche3\Downloads\products385043493 (1).csv","r")  
+        #self.file = open("D:\Mis Documentos\Downloads\products385043493.csv","r")
+        self.db = firebase.database()
     
     def readEntry(self):
         """Get all entry boxes and write to inventory database."""
@@ -37,27 +38,34 @@ class ProductEntry(Frame):
         jsonData = {}
         db = firebase.database()
         self.db = db
-       
+        jsonDataStock = {}
         
-        #date = datetime.datetime.now().__str__()
-        #for line in self.file:
-        #    product, price, other = line.decode("utf-8").split("	")
-        #    if not price :
-        #        category = product
-        #    else :
-        #        jsonDataStock = {"name":  product,
-        #                    "price": price,
-        #                    "price_sell": price,
-        #                    "category": category,
-        #                    "stock": 0,
-        #                    "totalSell": 0,
-        #                    "initial_stock" :0,
-        #                    "lastupdate": date
-        #                    }        
-                #print jsonDataStock
-                #jsonToPython = json.loads(json.JSONEncoder().encode(jsonDataStock))
-                #results = db.child("product").push(jsonToPython)
-                #print results
+        date = datetime.datetime.now().__str__()
+        for line in self.file:
+            product, price, other = line.decode("utf-8").split("	")
+            if not price :
+                category = product
+            else :
+                jsonDataStock = {"name":  product,
+                                 "price": price,
+                                 "price_sell": price,
+                                 "category": category,
+                                 "stock": 0,
+                                 "totalSell": 0,
+                                 "initial_stock" :0,
+                                 "lastupdate": date
+                                 }        
+            print jsonDataStock
+            jsonToPython = json.loads(json.JSONEncoder().encode(jsonDataStock))
+            print jsonToPython
+            key = product.encode("utf-8")
+            results = db.child("product").child(key).set(jsonToPython)
+            #print results
+            
+        resultUpgrade = db.child("product").child("Te").upgrade(jsonToPython)
+ 
+        print resultUpgrade
+        '''
         #print jsonToPython
         # POST with form-encoded data
         #r = requests.post(url='https://stock-otra-mas.firebaseio.com/', data=jsonToPython)
@@ -71,15 +79,37 @@ class ProductEntry(Frame):
         for user in doc_ref.each():
             #print(user.key()) # Morty
             print(user.val()) # {name": "Mortimer 'Morty' Smith"}
-
+        '''
 
     def updateStock(self, key, record):
         """Opens DB, writes entries, then closes DB."""
-        self.db.child("product").child("Morty").set(data)
+        fileSellDaily = open(r'D:\Mis Documentos\Downloads\bestSellersPiece.csv',"r")
+        date = datetime.datetime.now().__str__()
+        for line in fileSellDaily:
+            product, count, total, other = line.decode("utf-8").split("	")
+            key = product.encode("ascii", "ignore").__str__()
+            doc_ref = self.db.child('product').child(key).get()
         
-        self.database = shelve.open(shelvename)
-        self.database[self.key] = self.record
-        self.database.close()  
+            jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
+            print jsonToPython
+            for asset in jsonToPython:
+                print asset # 
+                if asset == "stock" :
+                        jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count)
+            resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
+            print resultUpgrade
+        '''    
+        jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
+        print jsonToPython
+        for asset in jsonToPython:
+            print asset # 
+            if asset == "initial_stock" :
+                    jsonToPython["initial_stock"] = 7
+        print jsonToPython
+        resultUpgrade = self.db.child("product").child("Te").update(jsonToPython)
+        print resultUpgrade
+        #self.db.child("product").child("name").set(data)
+        '''  
 
 
    
@@ -251,7 +281,7 @@ def main():
     root = Tk()
     entry = ProductEntry(root)
     display = ProductDisplay(root)
-    entry.readEntry()
+    #entry.readEntry()
     entry.updateStock("123","hola")
     display.pack()
     root.mainloop()

@@ -13,6 +13,7 @@ import json
 import datetime
 import requests
 import pyrebase
+import re
 
 config = {
   "apiKey": "AIzaSyDLc8m8uKQm7eVk15TUkS-al9vLVPoczKQ",
@@ -53,7 +54,8 @@ class ProductEntry(Frame):
                                  "stock": 0,
                                  "totalSell": 0,
                                  "initial_stock" :0,
-                                 "lastupdate": date
+                                 "lastupdate": date,
+                                 "multiplier": 0
                                  }        
             print jsonDataStock
             jsonToPython = json.loads(json.JSONEncoder().encode(jsonDataStock))
@@ -88,9 +90,18 @@ class ProductEntry(Frame):
         for line in fileSellDaily:
             product, count, total, other = line.decode("utf-8").split("	")
             key = product.encode("ascii", "ignore").__str__()
+            print key
             doc_ref = self.db.child('product').child(key).get()
-        
             jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
+
+            
+            m = re.search('J_(/w)*', key)
+            print m
+            if m :
+                print m.group(0)
+                self.updateStockBerr( key, count, total, jsonToPython)
+   
+            '''
             print jsonToPython
             for asset in jsonToPython:
                 print asset # 
@@ -98,21 +109,43 @@ class ProductEntry(Frame):
                         jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count)
             resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
             print resultUpgrade
-        '''    
+        
         jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
-        print jsonToPython
-        for asset in jsonToPython:
-            print asset # 
-            if asset == "initial_stock" :
-                    jsonToPython["initial_stock"] = 7
-        print jsonToPython
-        resultUpgrade = self.db.child("product").child("Te").update(jsonToPython)
-        print resultUpgrade
-        #self.db.child("product").child("name").set(data)
         '''  
+    def updateStockBerr(self, key, count, total, jsonToPython):
+        print "----star updateStockBerr"
+        # multiplicado
+        multi = 0
+        jre = re.search('J_(/w)*', key)
+        pre = re.search('P_(/w)*', key)
+        p1_2re = re.search('/w+2P_(/w)*', key)
+        g19re = re.search('/w+9_(/w)*', key)
+        g1L =  re.search('G1L_(/w)*', key)
+        # multi per liter
+        if jre :
+            multi = 1
+        if g1L :
+            multi = 1    
+        if pre :
+            multi = 0.5
+        if p1_2re :
+            multi = 0.25    
+        if g19re :
+            multi = 1,9  
 
+        print multi
+        reStyle = re.search('(?<=_)\w+', key)
+        style = reStyle.group()
+        print   style
+        doc_ref = self.db.child('product').child(style).get()
+        print doc_ref.val()
+        jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
 
-   
+        jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count) * multi
+        
+        resultUpgrade = self.db.child("product").child(style).update(jsonToPython)
+        print "---- End updateStockBerr"
+
     def createDailySell(self):
         """Opens DB, writes entries, then closes DB."""
         self.db.child("product").child("Morty").set(data)

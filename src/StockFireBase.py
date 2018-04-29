@@ -30,17 +30,14 @@ class ProductEntry(Frame):
     """Interface for product entry."""
     
     def __init__(self, parent = None):
-        #self.file = open("D:\Mis Documentos\Downloads\products385043493.csv","r")
         self.db = firebase.database()
     
-    def readEntry(self):
+    def createMenu(self):
         """Get all entry boxes and write to inventory database."""
+        file = open("D:\Mis Documentos\Downloads\products385043493.csv","r")
         category = ""
         jsonData = {}
-        db = firebase.database()
-        self.db = db
-        jsonDataStock = {}
-        
+        jsonDataStock = {}        
         date = datetime.datetime.now().__str__()
         for line in self.file:
             product, price, other = line.decode("utf-8").split("	")
@@ -64,24 +61,25 @@ class ProductEntry(Frame):
             results = db.child("product").child(key).set(jsonToPython)
             #print results
             
-        resultUpgrade = db.child("product").child("Te").upgrade(jsonToPython)
- 
-        print resultUpgrade
-        '''
-        #print jsonToPython
-        # POST with form-encoded data
-        #r = requests.post(url='https://stock-otra-mas.firebaseio.com/', data=jsonToPython)
-        #requests.post(url, data=jsonToPython)
-        #print r.text
-        #print r.status_code
-        # data to save
-        doc_ref = db.child('product').get()
-        #db.child('product').get()
-        #print doc_ref
-        for user in doc_ref.each():
-            #print(user.key()) # Morty
-            print(user.val()) # {name": "Mortimer 'Morty' Smith"}
-        '''
+
+    def updateMenu(self, key, record):
+        """Opens DB, writes entries, then closes DB."""
+        fileSellDaily = open(r'D:\Mis Documentos\Downloads\products385043493.csv',"r")
+        date = datetime.datetime.now().__str__()
+        for line in fileSellDaily:
+            product, price, count, other = line.decode("utf-8").split("	")
+            key = product.encode("ascii", "ignore").__str__()
+            print key
+            doc_ref = self.db.child('product').child(key).get()
+            jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
+
+
+            jsonToPython["price"] = price
+            jsonToPython["stock"] = int(jsonToPython["stock"]) + count
+
+            resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
+            print resultUpgrade
+        
 
     def updateStock(self, key, record):
         """Opens DB, writes entries, then closes DB."""
@@ -101,17 +99,12 @@ class ProductEntry(Frame):
                 print m.group(0)
                 self.updateStockBerr( key, count, total, jsonToPython)
    
-            '''
-            print jsonToPython
-            for asset in jsonToPython:
-                print asset # 
-                if asset == "stock" :
-                        jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count)
+            
+            jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count)
             resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
             print resultUpgrade
         
-        jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
-        '''  
+ 
     def updateStockBerr(self, key, count, total, jsonToPython):
         print "----star updateStockBerr"
         # multiplicado

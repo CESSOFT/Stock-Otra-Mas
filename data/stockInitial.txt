@@ -1,0 +1,49 @@
+Café con Leche	40,00	
+Cortado	35,00	
+Express	35,00	
+Te	35,00	
+	Especial morrones	0	
+	pizza jamón y queso	11	
+	Pizza muza	23	
+	pizza peperoni	5	
+	Pizzetas	20	
+	agua	12	
+	Antares Barley Wine	2	
+	Antares Porter	1	
+	Antares Stout	2	
+	Aquarium Manzana	6	
+	Aquarium Naranja	5	
+	Aquarium Pera	6	
+	Aquarium pomelo	3	
+	Fernet botella	6	
+	G cerveza Corona	22	
+	G Patagonia 24 7	11	
+	G Patagonia Ámber Large	5	
+	G Patagonia kune	17	
+	G Patagonia Pilsener	4	
+	G Patagonia Weise	6	
+	Gas Coca cero	7	
+	Gas Coca vidrio	12	
+	Gas_Coca	5	
+	Gas_Fanta	11	
+	Gas_Sprit	12	
+	Medida Vodka smirnof	42	
+	Medida Fernet	36	
+	Speed	26	
+	Vodka smirnof	14	
+De toditos 145	95,00	
+Doritos 150	95,00	
+Doritos 90 y 105	75,00	
+Pringles	20	
+Glowler 1,9		
+Growlers 1 L	80,00	
+	Citra	48	
+	IPA	192,5	
+	kolsh	209	
+	Pumpkin	13	
+	Sunset	62,4	
+	Vienna	34,9	
+	Honey	175	
+	Dry Stoult	55,9	
+	Porter	61,6	
+	Irish Red	48	

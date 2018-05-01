@@ -14,6 +14,7 @@ import datetime
 import requests
 import pyrebase
 import re
+import os
 
 config = {
   "apiKey": "AIzaSyDLc8m8uKQm7eVk15TUkS-al9vLVPoczKQ",
@@ -24,8 +25,8 @@ config = {
 
 url = 'https://stock-otra-mas.firebaseio.com/'
 
-shelvename = "inventory.slv"
 firebase = pyrebase.initialize_app(config)
+
 class ProductEntry(Frame):
     """Interface for product entry."""
     
@@ -34,12 +35,13 @@ class ProductEntry(Frame):
     
     def createMenu(self):
         """Get all entry boxes and write to inventory database."""
-        file = open("D:\Mis Documentos\Downloads\products385043493.csv","r")
+        print os.getcwd()
+        file = open("..\data\productsAddIrishRed.txt","r")
         category = ""
         jsonData = {}
         jsonDataStock = {}        
         date = datetime.datetime.now().__str__()
-        for line in self.file:
+        for line in file:
             product, price, other = line.decode("utf-8").split("	")
             if not price :
                 category = product
@@ -54,28 +56,27 @@ class ProductEntry(Frame):
                                  "lastupdate": date,
                                  "multiplier": 0
                                  }        
-            print jsonDataStock
-            jsonToPython = json.loads(json.JSONEncoder().encode(jsonDataStock))
-            print jsonToPython
-            key = product.encode("utf-8")
-            results = db.child("product").child(key).set(jsonToPython)
-            #print results
+                print jsonDataStock
+                jsonToPython = json.loads(json.JSONEncoder().encode(jsonDataStock))
+                print jsonToPython
+                key = product.encode("utf-8")
+                results = self.db.child("product").child(key).set(jsonToPython)
+         
             
 
-    def updateMenu(self, key, record):
+    def updateMenu(self, record):
         """Opens DB, writes entries, then closes DB."""
-        fileSellDaily = open(r'D:\Mis Documentos\Downloads\products385043493.csv',"r")
+        fileSellDaily = open(r'..\data\StockBeer.txt',"r")
         date = datetime.datetime.now().__str__()
         for line in fileSellDaily:
-            product, price, count, other = line.decode("utf-8").split("	")
+            product, change, other = line.decode("utf-8").split("	")
             key = product.encode("ascii", "ignore").__str__()
             print key
             doc_ref = self.db.child('product').child(key).get()
             jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
 
 
-            jsonToPython["price"] = price
-            jsonToPython["stock"] = int(jsonToPython["stock"]) + count
+            jsonToPython[record] = change
 
             resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
             print resultUpgrade
@@ -149,55 +150,24 @@ class ProductDisplay(Frame):
     
     def __init__(self, parent = None):
         """Create, pack, and bind entry boxes and buttons for product display"""
-        
-        Frame.__init__(self)
-        self.pack()
-        
-        self.frameHeading = Frame(self)
-        self.frameHeading.pack()
-        
-        self.frameHeadingTitle = Label(self.frameHeading, text = "Current inventory",
-            font = ("Arial", "12", "bold"))
-        self.frameHeadingTitle.pack()      
-        
-        #---Database output
-        self.showInventoryFrame = Frame(self).pack()
-        
-        ##Imported table-like multilist box
-                                    
-        
-        #---Inventory display buttons
-        self.inventoryBtnFrame = Frame(self).pack()
-        self.fetchInven = Button(self.inventoryBtnFrame, text = "Get inventory",
-            command = self.getInven)
-        self.fetchInven.pack(side = LEFT)
-        
-        self.modifyInven = Button(self.inventoryBtnFrame, text = "Update listing",
-            command = self.changeInven)
-        self.modifyInven.pack(side= LEFT)
-        
-        self.deleteInven = Button(self.inventoryBtnFrame, text = "Delete entry",
-            command = self.clearEntry)
-        self.deleteInven.pack(side = LEFT)
-        
-        self.clearInven = Button(self.inventoryBtnFrame, text = "Clear inventory",
-            command = self.delInven)
-        self.clearInven.pack(side = LEFT)
+        self.db = firebase.database()
+   
     
-    def getInven(self):
-        """Gets products from DB and displays them.
-        
-        Opens the shelve, loops through each entry, prints the unpacked tuple
-        for each record, then closes the shelve."""
-        self.listBox.delete(0, END)
-        self.productList = shelve.open(shelvename)
-        for item in self.productList.keys():
-            (self.descrip, self.colors, self.cost, self.price, 
-                self.quan) = self.productList[item]    #unpack tuple
-            self.listBox.insert(END, (item, self.descrip, self.colors, self.cost,
-                self.price, self.quan))
-        self.productList.close()
+    def getStock(self):
+        """Gets products from DB and displays them."""
+        doc_ref = self.db.child('product').get()
+        for product in doc_ref.each():
+            
+            #print product.val()
+            key = product.key().encode("ascii", "ignore").__str__()
+            jsonToPython = json.loads(json.JSONEncoder().encode(product.val()))
+            try:
+                print str(key)+ "        stock : "+str(jsonToPython["stock"])
+                
+            except KeyError:
+                print jsonToPython
     
+                          
     def clearEntry(self):
         """Deletes an entry from the database.
         
@@ -307,8 +277,10 @@ def main():
     root = Tk()
     entry = ProductEntry(root)
     display = ProductDisplay(root)
-    #entry.readEntry()
-    entry.updateStock("123","hola")
+    #entry.createMenu()
+    entry.updateMenu("stock")
+    #entry.updateStock("stock")
+    display.getStock()
     display.pack()
     root.mainloop()
     

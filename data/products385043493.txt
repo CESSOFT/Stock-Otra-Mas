@@ -11,6 +11,7 @@ P_Pro_Porter	70,00
 P_Pro_Pumpkin	70,00	
 P_Pro_Sunset	70,00	
 P_Pro_Vienna	70,00	
+P_Pro_IrishRed	70,00	
 Pintas		
 P_Citra	80,00	
 P_IPA	90,00	
@@ -21,6 +22,7 @@ P_Honey	80,00
 P_Vienna	80,00	
 P_Dry Stoult	80,00	
 P_Porter	90,00	
+P_IrishRed	80,00	
 CAFETERÍA		
 Café con Leche	40,00	
 Cortado	35,00	
@@ -41,16 +43,18 @@ J_Honey	140,00
 J_Vienna	140,00	
 J_Dry Stoult	140,00	
 J_Porter	140,00	
-1/2 Pintas		
-1/2P_citra	50,00	
-1/2P_IPA	55,00	
-1/2P_Kolsh	50,00	
-1/2P_Porter	55,00	
-1/2P_Pumpkin	50,00	
-1/2P_Sunset	50,00	
-1/2P_Vienna	50,00	
-1/2P_Honey	50,00	
-1/2P_Dry Stoult	50,00	
+J_IrishRed	130,00	
+1_2 Pintas		
+1_2P_citra	50,00	
+1_2P_IPA	55,00	
+1_2P_Kolsh	50,00	
+1_2P_Porter	55,00	
+1_2P_Pumpkin	50,00	
+1_2P_Sunset	50,00	
+1_2P_Vienna	50,00	
+1_2P_Honey	50,00	
+1_2P_Dry Stoult	50,00	
+1_2P_IrishRed	50,00	
 Picadas		
 picada Otra más!!	150,00	
 Picada Promo	130,00	
@@ -64,6 +68,7 @@ G1,9_Vienna	190,00
 G1,9_Honey	190,00	
 G1,9_Dry Stoult	190,00	
 G1,9_Porter	220,00	
+G1,9_IrishRed	190,00	
 Pizzas		
 Especial morrones	155,00	
 pizza fugaceta	155,00	
@@ -111,6 +116,7 @@ G1L_Pumpkin	110,00
 G1L_Sunset	110,00	
 G1L_Vienna	110,00	
 G1L_Honey	110,00	
+G1L_IrishRed	110,00	
 Snack		
 De toditos 145	95,00	
 Doritos 150	95,00	
@@ -128,4 +134,4 @@ Vienna	69,00
 Honey	75,00	
 Dry Stoult	75,00	
 Porter	80,00	
-Irish Red 52,08
+Irish Red	52,08	

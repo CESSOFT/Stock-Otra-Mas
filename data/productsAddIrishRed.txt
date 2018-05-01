@@ -1,0 +1,14 @@
+﻿Pintas Promo		
+P_Pro_IrishRed	70,00	
+Pintas		
+P_IrishRed	80,00	
+Jarras		
+J_IrishRed	130,00	
+1_2Pintas		
+1_2P_IrishRed	50,00	
+Growlers 1,9		
+G1,9_IrishRed	190,00	
+Growlers 1 L		
+G1L_IrishRed	110,00	
+Envases		
+IrishRed	52,08	

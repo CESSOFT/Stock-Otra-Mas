@@ -1,10 +1,10 @@
 Citra	48	
-IPA	192,5	
-kolsh	209	
+IPA	192.5	
+Kolsh	209	
 Pumpkin	13	
-Sunset	62,4	
-Vienna	34,9	
+Sunset	62.4	
+Vienna	34.9	
 Honey	175	
-Dry Stoult	55,9	
-Porter	61,6	
-Irish Red	48	
+Dry_Stoult	55.9	
+Porter	61.6	
+IrishRed	48	

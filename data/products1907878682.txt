@@ -1,0 +1,2 @@
+Beer		
+IrishRed	52,08	

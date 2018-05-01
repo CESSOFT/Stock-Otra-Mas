@@ -36,7 +36,7 @@ class ProductEntry(Frame):
     def createMenu(self):
         """Get all entry boxes and write to inventory database."""
         print os.getcwd()
-        file = open("..\data\productsAddIrishRed.txt","r")
+        file = open("..\data\products1907878682.txt","r")
         category = ""
         jsonData = {}
         jsonDataStock = {}        
@@ -82,28 +82,28 @@ class ProductEntry(Frame):
             print resultUpgrade
         
 
-    def updateStock(self, key, record):
+    def updateStock(self):
         """Opens DB, writes entries, then closes DB."""
-        fileSellDaily = open(r'D:\Mis Documentos\Downloads\bestSellersPiece.csv',"r")
+        fileSellDaily = open(r'D:\Mis Documentos\Edu\repo\Stock-Otra-Mas\data\01_04_18_Beer.txt',"r")
         date = datetime.datetime.now().__str__()
         for line in fileSellDaily:
-            product, count, total, other = line.decode("utf-8").split("	")
+            product, count, total = line.decode("utf-8").split("	")
             key = product.encode("ascii", "ignore").__str__()
             print key
             doc_ref = self.db.child('product').child(key).get()
             jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
 
             
-            m = re.search('J_(/w)*', key)
+            m = re.search('J_(/w)*|P_(/w)*|9_(/w)*|G1L_(/w)*', key)
             print m
             if m :
                 print m.group(0)
                 self.updateStockBerr( key, count, total, jsonToPython)
    
-            
-            jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count)
-            resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
-            print resultUpgrade
+            else:
+                jsonToPython["stock"] = float(jsonToPython["stock"]) - float(count)
+                resultUpgrade = self.db.child("product").child(key).update(jsonToPython)
+                print resultUpgrade
         
  
     def updateStockBerr(self, key, count, total, jsonToPython):
@@ -112,8 +112,8 @@ class ProductEntry(Frame):
         multi = 0
         jre = re.search('J_(/w)*', key)
         pre = re.search('P_(/w)*', key)
-        p1_2re = re.search('/w+2P_(/w)*', key)
-        g19re = re.search('/w+9_(/w)*', key)
+        p1_2re = re.search('(/w)*2P_(/w)*', key)
+        g19re = re.search('(/w)*9_(/w)*', key)
         g1L =  re.search('G1L_(/w)*', key)
         # multi per liter
         if jre :
@@ -125,7 +125,7 @@ class ProductEntry(Frame):
         if p1_2re :
             multi = 0.25    
         if g19re :
-            multi = 1,9  
+            multi = 1.9  
 
         print multi
         reStyle = re.search('(?<=_)\w+', key)
@@ -134,9 +134,12 @@ class ProductEntry(Frame):
         doc_ref = self.db.child('product').child(style).get()
         print doc_ref.val()
         jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
-
-        jsonToPython["stock"] = int(jsonToPython["stock"]) - int(count) * multi
-        
+        print "Stock inicial: "
+        print float(jsonToPython["stock"])
+        print count
+        jsonToPython["stock"] = float(jsonToPython["stock"]) - float(count) * multi
+        print "Stock final:"
+        print jsonToPython["stock"]
         resultUpgrade = self.db.child("product").child(style).update(jsonToPython)
         print "---- End updateStockBerr"
 
@@ -278,8 +281,8 @@ def main():
     entry = ProductEntry(root)
     display = ProductDisplay(root)
     #entry.createMenu()
-    entry.updateMenu("stock")
-    #entry.updateStock("stock")
+    #entry.updateMenu("stock")
+    #entry.updateStock()
     display.getStock()
     display.pack()
     root.mainloop()

@@ -84,7 +84,7 @@ class ProductEntry(Frame):
 
     def updateStock(self):
         """Opens DB, writes entries, then closes DB."""
-        fileSellDaily = open(r'D:\Mis Documentos\Edu\repo\Stock-Otra-Mas\data\01_04_18_Beer.txt',"r")
+        fileSellDaily = open(r'D:\Mis Documentos\Edu\repo\Stock-Otra-Mas\data\abril\02to30_04_18_Beer.txt',"r")
         date = datetime.datetime.now().__str__()
         for line in fileSellDaily:
             product, count, total = line.decode("utf-8").split("	")
@@ -115,6 +115,8 @@ class ProductEntry(Frame):
         p1_2re = re.search('(/w)*2P_(/w)*', key)
         g19re = re.search('(/w)*9_(/w)*', key)
         g1L =  re.search('G1L_(/w)*', key)
+
+        reStyle = re.search('(?<=_)\w+', key)
         # multi per liter
         if jre :
             multi = 1
@@ -123,13 +125,18 @@ class ProductEntry(Frame):
         if pre :
             multi = 0.5
         if p1_2re :
+            reStyle = re.search('(?<=_2P_)\w*', key)
             multi = 0.25    
         if g19re :
             multi = 1.9  
 
         print multi
-        reStyle = re.search('(?<=_)\w+', key)
+        
         style = reStyle.group()
+        print   style
+        m = re.search('(?<=Pro_)\w+', style)
+        if m:
+            style = m.group()
         print   style
         doc_ref = self.db.child('product').child(style).get()
         print doc_ref.val()
@@ -138,6 +145,7 @@ class ProductEntry(Frame):
         print float(jsonToPython["stock"])
         print count
         jsonToPython["stock"] = float(jsonToPython["stock"]) - float(count) * multi
+        jsonToPython["totalSell"] = float(jsonToPython["totalSell"]) + float(total)
         print "Stock final:"
         print jsonToPython["stock"]
         resultUpgrade = self.db.child("product").child(style).update(jsonToPython)
@@ -156,7 +164,8 @@ class ProductDisplay(Frame):
         self.db = firebase.database()
    
     
-    def getStock(self):
+    def getStock(self, category):
+            
         """Gets products from DB and displays them."""
         doc_ref = self.db.child('product').get()
         for product in doc_ref.each():
@@ -170,7 +179,22 @@ class ProductDisplay(Frame):
             except KeyError:
                 print jsonToPython
     
-                          
+    def getStockBeer(self):
+        Styles = "IPA,Porter,Kolsh,Dry_Stoult,Vienna,Sunset,IrishRed,Pumpkin,Citra,Honey".split(',')    
+        """Gets products from DB and displays them."""
+        
+        #self.db.child('product').get()
+        for style in Styles:
+            doc_ref = self.db.child('product').child(style).get()
+            #print product.val()
+            jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
+            try:
+                print str(style)+ "        stock : "+str(jsonToPython["stock"])
+                
+            except KeyError:
+                print jsonToPython
+    
+                                                
     def clearEntry(self):
         """Deletes an entry from the database.
         
@@ -283,7 +307,8 @@ def main():
     #entry.createMenu()
     #entry.updateMenu("stock")
     #entry.updateStock()
-    display.getStock()
+    #display.getStock("category")
+    display.getStockBeer()
     display.pack()
     root.mainloop()
     

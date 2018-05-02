@@ -1,0 +1,16 @@
+Gas Coca vidrio	4	160
+picada Otra más!!	3	450
+Lata nacional	3	150
+G Patagonia 24 7	2	220
+Pizza muza	2	190
+Mocha	2	120
+pizza jamón y queso	1	155
+G cerveza Corona	1	110
+G Patagonia Pilsener	1	110
+Glowler 1,9	1	100
+Doritos 90 y 105	1	75
+Medida Vodka smirnof	1	50
+Gas Coca cero	1	40
+Gas_Sprit	1	40
+Lungo	1	40
+cazuela queso	1	25

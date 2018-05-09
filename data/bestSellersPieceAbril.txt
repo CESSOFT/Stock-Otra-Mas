@@ -1,0 +1,80 @@
+J_Kolsh	57	7980,00
+P_IPA	53	4770,00
+J_Honey	42	5880,00
+J_IPA	42	5880,00
+J_Sunset	25	3500,00
+G1,9_IPA	24	5280,00
+Gas Coca vidrio	24	960,00
+Pizza muza	22	2365,00
+P_Sunset	22	1680,00
+P_Kolsh	21	1680,00
+P_Honey	18	1440,00
+P_Porter	17	1530,00
+Pringles	16	1240,00
+Medida Vodka smirnof	16	800,00
+J_Vienna	15	2100,00
+pizza peperoni	12	1516,00
+Especial morrones	12	1350,00
+Glowler 1,9	12	1200,00
+G1,9_Kolsh	11	2090,00
+G cerveza Corona	11	1270,00
+P_Vienna	11	880,00
+Cortado	10	350,00
+G1,9_Sunset	9	1710,00
+Lata nacional	9	450,00
+Gas_Coca	9	360,00
+Express	9	315,00
+Te	9	315,00
+cazuela queso	9	225,00
+Cerveza chica	8	600,00
+G1L_IPA	7	980,00
+J_Dry_Stoult	7	980,00
+Growlers 1 L	7	560,00
+P_Citra	7	560,00
+Mocha	7	395,00
+cazuela	7	210,00
+1_2P_IPA	6	330,00
+G1,9_Porter	5	1100,00
+P_Dry_Stoult	5	400,00
+Doritos 90 y 105	5	375,00
+Merienda	5	250,00
+Gas_Fanta	5	200,00
+Gas_Sprit	5	200,00
+G1L_Citra	4	480,00
+G1L_Kolsh	4	440,00
+G1L_Sunset	4	440,00
+1_2P_Kolsh	4	200,00
+jugo de Naranja	4	100,00
+G1,9_Citra	3	570,00
+G1,9_Honey	3	560,00
+J_Porter	3	420,00
+J_Citra	3	390,00
+G Patagonia 24 7	3	340,00
+agua	3	120,00
+Gas Coca cero	3	120,00
+G1,9_Dry_Stoult	2	380,00
+G1L_Dry_Stoult	2	220,00
+Nachos	2	150,00
+Merienda Otra Mas	2	140,00
+1_2P_Dry_Stoult	2	100,00
+1_2P_Honey	2	100,00
+Lungo	2	80,00
+Fernet botella	1	220,00
+G1,9_IrishRed	1	190,00
+G1,9_Pumpkin	1	190,00
+G1,9_Vienna	1	190,00
+G1L_Porter	1	140,00
+J_IrishRed	1	130,00
+G Patagonia Weise	1	120,00
+G Patagonia Pilsener	1	110,00
+G1L_Honey	1	110,00
+P_IrishRed	1	80,00
+P_Pumpkin	1	80,00
+P_Pro_Honey	1	70,00
+P_Pro_IPA	1	70,00
+1_2P_Porter	1	55,00
+1_2P_Citra	1	50,00
+1_2P_Vienna	1	50,00
+Aquarium pomelo	1	40,00
+Speed	1	30,00
+Capuchino	1	25,00

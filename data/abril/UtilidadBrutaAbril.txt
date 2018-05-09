@@ -1,0 +1,86 @@
+Typo	Utilidad Bruta	Cantidad	Total
+J_Kolsh	4047	57	7980
+P_IPA	2650	53	4770
+J_Honey	2730	42	5880
+J_IPA	2520	42	5880
+J_Sunset	1750	25	3500
+G1,9_IPA	1632	24	5280
+Gas Coca vidrio	576	24	960
+Pizza muza	1100	22	2365
+P_Sunset	990	22	1680
+P_Kolsh	945	21	1680
+P_Honey	765	18	1440
+P_Porter	850	17	1530
+Pringles	448	16	1240
+Medida Vodka smirnof	480	16	800
+J_Vienna	975	15	2100
+pizza peperoni	852	12	1516
+Especial morrones	852	12	1350
+Glowler 1,9	480	12	1200
+G1,9_Kolsh	627	11	2090
+G cerveza Corona	715	11	1270
+P_Vienna	495	11	880
+Cortado	230	10	350
+G1,9_Sunset	513	9	1710
+Lata nacional	225	9	450
+Gas_Coca	216	9	360
+Express	207	9	315
+Te	252	9	315
+cazuela queso	0	9	225
+Cerveza chica	280	8	600
+G1L_IPA	420	7	980
+J_Dry_Stoult	497	7	980
+Growlers 1 L	210	7	560
+P_Citra	378	7	560
+Mocha	245	7	395
+cazuela	70	7	210
+1_2P_IPA	210	6	330
+G1,9_Porter	340	5	1100
+P_Dry_Stoult	225	5	400
+Doritos 90 y 105	150	5	375
+Merienda	125	5	250
+Gas_Fanta	120	5	200
+Gas_Sprit	125	5	200
+G1L_Citra	232	4	480
+G1L_Kolsh	160	4	440
+G1L_Sunset	160	4	440
+1_2P_Kolsh	130	4	200
+jugo de Naranja	52	4	100
+G1,9_Citra	296,4	3	570
+G1,9_Honey	171	3	560
+J_Porter	180	3	420
+J_Citra	234	3	390
+G Patagonia 24 7	198	3	340
+agua	96	3	120
+Gas Coca cero	72	3	120
+G1,9_Dry_Stoult	114	2	380
+G1L_Dry_Stoult	80	2	220
+Nachos	90	2	150
+Merienda Otra Mas	60	2	140
+1_2P_Dry_Stoult	65	2	100
+1_2P_Honey	64	2	100
+Lungo	56	2	80
+Fernet botella	75	1	220
+G1,9_IrishRed	98,8	1	190
+G1,9_Pumpkin	38	1	190
+G1,9_Vienna	57	1	190
+G1L_Porter	60	1	140
+J_IrishRed	78	1	130
+G Patagonia Weise	66	1	120
+G Patagonia Pilsener	66	1	110
+G1L_Honey	35	1	110
+P_IrishRed	54	1	80
+P_Pumpkin	40	1	80
+P_Pro_Honey	32,5	1	70
+P_Pro_IPA	30	1	70
+1_2P_Porter	35	1	55
+1_2P_Citra	37	1	50
+1_2P_Vienna	32,5	1	50
+Aquarium pomelo	25	1	40
+Speed	8	1	30
+Capuchino	35	1	25
+picada Otra más!!	1530	17	3230
+pizza jamón y queso	960	16	2560
+Café con Leche	75	3	105
+G Patagonia Ámber Large	70	1	120
+Total abril :	37565,2	744	79571

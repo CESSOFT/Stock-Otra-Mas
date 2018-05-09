@@ -193,6 +193,23 @@ class ProductDisplay(Frame):
                 
             except KeyError:
                 print jsonToPython
+
+
+    def getUtilidadBruta(self):
+
+        fileSellDaily = open(r'D:\Mis Documentos\Edu\repo\Stock-Otra-Mas\data\bestSellersPieceAbril.txt',"r")
+        date = datetime.datetime.now().__str__()
+        total = float(0)
+        for line in fileSellDaily:
+            product, count, totalSell = line.decode("utf-8").split("	")
+            doc_ref = self.db.child('product').child(product).get()
+            jsonToPython = json.loads(json.JSONEncoder().encode(doc_ref.val()))
+
+            ganancia = (float(jsonToPython["price_sell"])- float(jsonToPython["price"])) * float(count)
+            print str(product)+ "   ganancia :  "+str(ganancia)
+            total =  float(total) + float(ganancia)
+
+        print "Total abril : " + str(total)
     
                                                 
     def clearEntry(self):
@@ -308,8 +325,8 @@ def main():
     #entry.updateMenu("stock")
     #entry.updateStock()
     #display.getStock("category")
-    display.getStockBeer()
-    display.pack()
+    #display.getStockBeer()
+    display.getGanancia()
     root.mainloop()
     
 if __name__ == "__main__":
